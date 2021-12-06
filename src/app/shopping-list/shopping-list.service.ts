@@ -37,4 +37,9 @@ export class ShoppingListService {
         this.ingredientsChanged.next(this.ingredients.slice());
         // call this item on onadditem s-e-c.ts
     }
+
+    deleteIngredient(index: number){
+        this.ingredients.splice(index, 1);
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
 }
