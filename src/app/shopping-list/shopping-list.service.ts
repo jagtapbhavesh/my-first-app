@@ -31,4 +31,10 @@ export class ShoppingListService {
      this.ingredients.push(...ingredients); 
      this.ingredientsChanged.next(this.ingredients.slice());
     }
+
+    updateIngredient(index: number, newIngredient: Ingredient){
+        this.ingredients[index] = newIngredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+        // call this item on onadditem s-e-c.ts
+    }
 }
