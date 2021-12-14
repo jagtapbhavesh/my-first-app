@@ -13,6 +13,7 @@ import {
   Params,
   Router
 } from '@angular/router';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 import {
   RecipeService
 } from '../recipe.service';
@@ -66,6 +67,14 @@ export class RecipeEditComponent implements OnInit {
         ])
       })
     )
+  }
+
+  onDeleteIngredient(index: number){
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+  }
+
+  onDeleteAllIngredients(){
+    (<FormArray>this.recipeForm.get('ingredients')).clear();
   }
 
   onCancel(){
