@@ -1,12 +1,14 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
-import { Subject, throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 
 import { User } from "./user.model";
+import { Router } from "@angular/router";
 
 
 export interface AuthResponseData {
+    kind: string;
     idtoken: string;
     email: string;
     refreshToken: string;
@@ -15,16 +17,16 @@ export interface AuthResponseData {
     registered?: boolean;
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-    user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
 
-    constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient, private router: Router) {}
 
     signup(email: string, password: string,) {
-        return this.http.post<AuthResponseData>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key= AIzaSyCO2REIvZbnCQBSsf-vW6eNQ1WqVUMSAYs',
+        return this.http
+        .post<AuthResponseData>(
+           'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key= AIzaSyCO2REIvZbnCQBSsf-vW6eNQ1WqVUMSAYs',
         {
             email: email,
             password: password,
@@ -57,6 +59,11 @@ export class AuthService {
                     +resData.expiresIn
                 );
         }));
+    }
+
+    logout() {
+        this.user.next(null);
+        this.router.navigate(['/auth']);
     }
 
     private handleAuthentication(
