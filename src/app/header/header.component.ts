@@ -35,9 +35,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onFetchData() {
     this.dataStorageService.fetchRecipes().subscribe();
     this.userSub = this.authService.user.subscribe(user => {
-      console.log(user.token);
-      console.log(user.id);
-      console.log(user.email);
     });
   }
 
