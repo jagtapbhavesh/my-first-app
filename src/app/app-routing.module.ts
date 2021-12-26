@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     //     {path:':id', component: RecipeDetailComponent, resolve: [RecipeResolverService] },
     //     {path:':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService]  }
     // ] },
-    { path: 'shopping-list', component: ShoppingListComponent},
+    // { path: 'shopping-list', component: ShoppingListComponent},
     { path: 'auth', component: AuthComponent}
 ];
 
